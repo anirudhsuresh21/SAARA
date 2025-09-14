@@ -342,7 +342,11 @@ def natural_language_library_search(query: str) -> str:
         r"(?:find|search for|look for|do you have)\s+['\"]([^'\"]+)['\"]",
         r"(?:find|search for|look for|do you have)\s+(.+?)(?:\s+by\s+|\s+author|\s*$)",
         r"book\s+['\"]([^'\"]+)['\"]",
-        r"book\s+(.+?)(?:\s+by\s+|\s+author|\s*$)"
+        r"book\s+(.+?)(?:\s+by\s+|\s+author|\s*$)",
+        r"['\"]([^'\"]+)['\"]",  # Extract quoted titles
+        r"^(.+?)\s+by\s+",  # Extract title before "by author"
+        r"^(.+?)\s+book\s*$",  # Extract subject before "book"
+        r"^([a-zA-Z0-9\s:,\.\-]+?)(?:\s+by\s+|\s+author|\s*$)"  # General title extraction
     ]
     
     extracted_title = None

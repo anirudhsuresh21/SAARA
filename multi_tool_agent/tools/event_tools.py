@@ -270,8 +270,15 @@ def search_events_by_keywords(keywords: List[str],
                 "category": event.category.value,
                 "date": event.date,
                 "time": event.time,
+                "end_time": event.end_time,
                 "location": event.location,
+                "department": event.department,
+                "organizer": event.organizer,
+                "registration_required": event.registration_required,
                 "registration_link": event.registration_link,
+                "capacity": event.capacity,
+                "current_registrations": event.current_registrations,
+                "tags": event.tags or [],
                 "cost": event.cost
             }
             matching_events.append(event_dict)
@@ -394,7 +401,7 @@ def natural_language_event_search(query: str) -> str:
             break
     
     # Extract time constraints
-    days_ahead = 30  # default
+    days_ahead = 60  # default increased to show more events
     if "today" in query_lower:
         days_ahead = 1
     elif "this week" in query_lower:
